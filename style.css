@@ -1,0 +1,345 @@
+/* --- CSS Variables for Theming --- */
+:root {
+    /* Light Mode Palette - Improved */
+    --bg-color-light: #FAF3E0; /* Warm Cream */
+    --text-color-light: #2E2E2E; /* Dark Charcoal */
+    --accent-color-light: #EB455F; /* Elegant Deep Red */
+    --card-bg-light: #ffffffd6; /* Crisp White for contrast */
+    --card-shadow-light: rgba(80, 40, 20, 0.1); /* Warm subtle shadow */
+    --bg-header-light: rgba(255, 255, 255, 0.5);
+
+    /* Dark Mode Palette (unchanged) */
+    --bg-color-dark: #121212; /* Dark Grey */
+    --text-color-dark: #E0E0E0;
+    --accent-color-dark: #00FF41; /* Matrix Green */
+    --card-bg-dark: #1E1E1E;
+    --card-shadow-dark: rgba(0, 255, 65, 0.1);
+    --bg-header-dark: rgba(0, 0, 0, 0.5);
+}
+
+/* --- General Styles --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+p {
+    font-size: large;
+}
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 1.5s ease forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--accent-color-light); /* Or dark mode version when applicable */
+}
+body.dark-mode a:hover {
+    color: var(--accent-color-dark);
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-color-light);
+    color: var(--text-color-light);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* --- Dark Mode Theme --- */
+body.dark-mode {
+    background-color: var(--bg-color-dark);
+    color: var(--text-color-dark);
+}
+
+/* --- Matrix Canvas Background --- */
+#matrixCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Place it behind all content */
+    display: none; /* Hidden by default */
+}
+
+body.dark-mode #matrixCanvas {
+    display: block; /* Show only in dark mode */
+}
+
+.content-wrapper {
+    position: relative;
+    z-index: 1;
+    padding: 0 5%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* --- Header & Navigation --- */
+header {
+    padding: 20px 0;
+    width: 100%; /* Make the header take the whole width */
+    position: fixed; /* Fix the header at the top */
+    top: 0;
+    left: 0;
+    z-index: 100; /* Ensure it's above other content */
+}
+
+header:not(.dark-mode) {
+    background-color: var(--bg-header-light); /* Transparent dark background */
+    backdrop-filter: blur(5px); /* Add a blur effect to the background */
+}
+
+header.dark-mode {
+    background-color: var(--bg-header-dark); /* Transparent dark background */
+    backdrop-filter: blur(5px); /* Add a blur effect to the background */
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    position: relative;
+    left: 100px;
+    color: var(--accent-color-light);
+}
+body.dark-mode .logo {
+    color: var(--accent-color-dark);
+}
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 40px;
+    margin: 0; /* Remove auto margins */
+    padding: 0; /* Remove padding */
+    position: absolute; /* Use absolute positioning */
+    left: 50%; /* Position the left edge at the horizontal center */
+    transform: translateX(-50%); /* Shift the element back by half its width */
+}
+
+
+nav ul a {
+    text-decoration: none;
+    color: var(--text-color-light);
+    font-weight: 600;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+body.dark-mode nav ul a {
+    color: var(--text-color-dark);
+}
+
+nav ul a:hover {
+    color: var(--accent-color-light);
+}
+body.dark-mode nav ul a:hover {
+    color: var(--accent-color-dark);
+}
+
+#mode-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: var(--text-color-light);
+    position: relative;
+    right: 100px;
+}
+body.dark-mode #mode-toggle {
+    color: var(--text-color-dark);
+}
+
+/* --- Welcome Section --- */
+.welcome-section {
+    text-align: center;
+    padding: 150px 20px;
+}
+
+/* UPDATED RULE */
+.welcome-box {
+    background-color: var(--card-bg-light);
+    padding: 40px;
+    border-radius: 20px; /* Rounded box-rectangle */
+    box-shadow: 0 0 15px rgba(0, 128, 0, 0.1); /* Subtle green shadow for light mode */
+    max-width: 800px;
+    margin: 0 auto;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+/* UPDATED RULE */
+body.dark-mode .welcome-box {
+    background-color: var(--card-bg-dark);
+    box-shadow: 0 0 20px 5px rgba(0, 255, 65, 0.3); /* More prominent green glow for dark mode */
+}
+
+.welcome-box h1 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.welcome-box p {
+    direction: rtl;
+    font-size: 1.5rem;
+    line-height: 1.6;
+}
+
+/* --- article Section --- */
+.article-section {
+    text-align: right;
+    padding: 150px 20px;
+}
+
+/* UPDATED RULE */
+.article-box {
+    background-color: var(--card-bg-light);
+    padding: 40px;
+    border-radius: 20px; /* Rounded box-rectangle */
+    box-shadow: 0 0 15px rgba(0, 128, 0, 0.1); /* Subtle green shadow for light mode */
+    width: 1800px;
+    height: 700px;
+    position: relative;
+    margin: 0 auto;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+/* UPDATED RULE */
+body.dark-mode .article-box {
+    background-color: var(--card-bg-dark);
+    box-shadow: 0 0 20px 5px rgba(0, 255, 65, 0.3); /* More prominent green glow for dark mode */
+}
+
+.article-box h1 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.article-box p {
+    direction: rtl;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+/* --- Gallery Section --- */
+.gallery-section {
+    display: flex;
+    justify-content: center;
+    align-items: stretch; /* Make items equal height */
+    gap: 20px;
+    padding-bottom: 60px;
+    width: 60%;
+    left: 20%;
+    position: relative;
+}
+
+.gallery-item {
+    position: relative;
+    flex: 1; /* Assign flex value for sizing */
+    border-radius: 15px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease, filter 0.4s ease; /* Removed opacity from transition */
+
+    /* Greyed out by default */
+    filter: grayscale(80%);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 300px; /* Increased height */
+    object-fit: cover; /* Ensure image covers the box */
+    display: block;
+}
+
+
+.middle-item {
+    flex: 1.5; /* Middle item is wider */
+}
+
+.gallery-item:hover {
+    transform: scale(1.05);
+    /* Un-grey on hover */
+    filter: grayscale(0%);
+}
+
+.gallery-item {
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure image covers the box */
+    display: block;
+}
+
+.item-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 15px;
+    text-align: center;
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 900px) { /* Widened the breakpoint for a better tablet look */
+    nav ul {
+        display: none; /* Hide nav links on small screens for simplicity */
+    }
+    nav {
+        justify-content: space-between;
+    }
+    .logo {
+        flex-grow: 1; /* Allow logo to take space so toggle stays on the right */
+    }
+}
+
+@media (max-width: 768px) {
+    .gallery-section {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .gallery-item,
+    .middle-item {
+        width: 90%;
+        max-width: 500px;
+        flex: 1; /* Reset flex property for vertical stacking */
+    }
+}
+
+.content {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
